@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productName": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "productName"
+    },
+    "description": {
+      "type": "text"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "active": {
+      "type": "boolean",
+      "default": true
+    },
+    "price": {
+      "type": "integer"
+    },
+    "origin": {
+      "type": "enumeration",
+      "enum": [
+        "Argentina",
+        "Uruguay",
+        "Brasil"
+      ]
+    },
+    "tipoProducto": {
+      "type": "enumeration",
+      "enum": [
+        "shampoo",
+        "acondicionador",
+        "bano_de_crema",
+        "tonico_capilar",
+        "tinturas",
+        "accesorios",
+        "decolorantes"
+      ]
+    },
+    "isFeatured": {
+      "type": "boolean"
+    },
+    "tipoCabello": {
+      "type": "enumeration",
+      "enum": [
+        "todo_tipo\t",
+        "graso\t",
+        "seco\t",
+        "teñido\t",
+        "dañado"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    }
+  }
+}
