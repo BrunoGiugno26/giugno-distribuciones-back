@@ -43,21 +43,24 @@
     "origin": {
       "type": "enumeration",
       "enum": [
-        "Argentina",
-        "Uruguay",
-        "Brasil"
+        "Mendoza",
+        "San Luis",
+        "San Juan"
       ]
     },
     "tipoProducto": {
       "type": "enumeration",
       "enum": [
-        "shampoo",
-        "acondicionador",
-        "bano_de_crema",
-        "tonico_capilar",
-        "tinturas",
-        "accesorios",
-        "decolorantes"
+        "Shampoo",
+        "Acondicionador",
+        "Reparador de Puntas",
+        "Ampollas",
+        "Baño De Crema",
+        "Tónico Capilar",
+        "Finalizador",
+        "Tinturas",
+        "Accesorios",
+        "Decolorantes"
       ]
     },
     "isFeatured": {
@@ -66,17 +69,26 @@
     "tipoCabello": {
       "type": "enumeration",
       "enum": [
-        "todo_tipo\t",
-        "graso\t",
-        "seco\t",
-        "teñido\t",
-        "dañado"
+        "Todo Tipo\t",
+        "Para Cabellos Grasos\t",
+        "Para Cabellos Secos\t",
+        "Para Cabellos Teñidos\t",
+        "Para Cabellos Dañados"
       ]
     },
     "category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::category.category"
+    },
+    "marca": {
+      "type": "enumeration",
+      "enum": [
+        "HAN",
+        "THERAPHY",
+        "PROTENAT",
+        "M&D"
+      ]
     }
   }
 }
