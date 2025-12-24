@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "favorite_items",
+  "info": {
+    "singularName": "favorite-item",
+    "pluralName": "favorite-items",
+    "displayName": "FavoriteItem"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userId": {
+      "type": "string"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    }
+  }
+}

@@ -362,105 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
-  info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    categoryName: Attribute.String;
-    slug: Attribute.UID<'api::category.category', 'categoryName'>;
-    mainimage: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProductProduct extends Schema.CollectionType {
-  collectionName: 'products';
-  info: {
-    singularName: 'product';
-    pluralName: 'products';
-    displayName: 'Product';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    productName: Attribute.String;
-    slug: Attribute.UID<'api::product.product', 'productName'>;
-    description: Attribute.Text;
-    images: Attribute.Media;
-    active: Attribute.Boolean & Attribute.DefaultTo<true>;
-    price: Attribute.Integer;
-    origin: Attribute.Enumeration<['Mendoza', 'San Luis', 'San Juan']>;
-    tipoProducto: Attribute.Enumeration<
-      [
-        'Shampoo',
-        'Acondicionador',
-        'Reparador de Puntas',
-        'Ampollas',
-        'Ba\u00F1o De Crema',
-        'T\u00F3nico Capilar',
-        'Finalizador',
-        'Tinturas',
-        'Accesorios',
-        'Decolorantes'
-      ]
-    >;
-    isFeatured: Attribute.Boolean;
-    tipoCabello: Attribute.Enumeration<
-      [
-        'Todo Tipo\t',
-        'Para Cabellos Grasos\t',
-        'Para Cabellos Secos\t',
-        'Para Cabellos Te\u00F1idos\t',
-        'Para Cabellos Da\u00F1ados'
-      ]
-    >;
-    category: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'api::category.category'
-    >;
-    marca: Attribute.Enumeration<['HAN', 'THERAPHY', 'PROTENAT', 'M&D']>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -882,6 +783,176 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCartItemCartItem extends Schema.CollectionType {
+  collectionName: 'cart_items';
+  info: {
+    singularName: 'cart-item';
+    pluralName: 'cart-items';
+    displayName: 'CartItem';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userId: Attribute.String;
+    quantity: Attribute.Integer;
+    product: Attribute.Relation<
+      'api::cart-item.cart-item',
+      'oneToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cart-item.cart-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cart-item.cart-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    categoryName: Attribute.String;
+    slug: Attribute.UID<'api::category.category', 'categoryName'>;
+    mainimage: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFavoriteItemFavoriteItem extends Schema.CollectionType {
+  collectionName: 'favorite_items';
+  info: {
+    singularName: 'favorite-item';
+    pluralName: 'favorite-items';
+    displayName: 'FavoriteItem';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    userId: Attribute.String;
+    product: Attribute.Relation<
+      'api::favorite-item.favorite-item',
+      'oneToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::favorite-item.favorite-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::favorite-item.favorite-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'Product';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    productName: Attribute.String;
+    slug: Attribute.UID<'api::product.product', 'productName'>;
+    description: Attribute.Text;
+    images: Attribute.Media;
+    active: Attribute.Boolean & Attribute.DefaultTo<true>;
+    price: Attribute.Integer;
+    origin: Attribute.Enumeration<['Mendoza', 'San Luis', 'San Juan']>;
+    tipoProducto: Attribute.Enumeration<
+      [
+        'Shampoo',
+        'Acondicionador',
+        'Reparador de Puntas',
+        'Ampollas',
+        'Ba\u00F1o De Crema',
+        'T\u00F3nico Capilar',
+        'Finalizador',
+        'Tinturas',
+        'Accesorios',
+        'Decolorantes'
+      ]
+    >;
+    isFeatured: Attribute.Boolean;
+    tipoCabello: Attribute.Enumeration<
+      [
+        'Todo Tipo\t',
+        'Para Cabellos Grasos\t',
+        'Para Cabellos Secos\t',
+        'Para Cabellos Te\u00F1idos\t',
+        'Para Cabellos Da\u00F1ados'
+      ]
+    >;
+    category: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::category.category'
+    >;
+    marca: Attribute.Enumeration<['HAN', 'THERAPHY', 'PROTENAT', 'M&D']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -892,8 +963,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::category.category': ApiCategoryCategory;
-      'api::product.product': ApiProductProduct;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -902,6 +971,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::cart-item.cart-item': ApiCartItemCartItem;
+      'api::category.category': ApiCategoryCategory;
+      'api::favorite-item.favorite-item': ApiFavoriteItemFavoriteItem;
+      'api::product.product': ApiProductProduct;
     }
   }
 }
