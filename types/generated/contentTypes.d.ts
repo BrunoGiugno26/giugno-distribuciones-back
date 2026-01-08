@@ -789,6 +789,7 @@ export interface ApiCartItemCartItem extends Schema.CollectionType {
     singularName: 'cart-item';
     pluralName: 'cart-items';
     displayName: 'CartItem';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -800,6 +801,11 @@ export interface ApiCartItemCartItem extends Schema.CollectionType {
       'api::cart-item.cart-item',
       'oneToOne',
       'api::product.product'
+    >;
+    variant: Attribute.Relation<
+      'api::cart-item.cart-item',
+      'oneToOne',
+      'api::variant.variant'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -904,7 +910,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     images: Attribute.Media;
     active: Attribute.Boolean & Attribute.DefaultTo<true>;
     price: Attribute.Integer;
-    origin: Attribute.Enumeration<['Mendoza', 'San Luis', 'San Juan']>;
+    origin: Attribute.Enumeration<['Argentina', 'Brasil', 'Francia']>;
     tipoProducto: Attribute.Enumeration<
       [
         'Shampoo',
@@ -935,6 +941,20 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'api::category.category'
     >;
     marca: Attribute.Enumeration<['HAN', 'THERAPHY', 'PROTENAT', 'M&D']>;
+    stock: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    variants: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::variant.variant'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -946,6 +966,53 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVariantVariant extends Schema.CollectionType {
+  collectionName: 'variants';
+  info: {
+    singularName: 'variant';
+    pluralName: 'variants';
+    displayName: 'Variant';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.String & Attribute.Required;
+    name: Attribute.String;
+    stock: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      > &
+      Attribute.DefaultTo<0>;
+    priceDelta: Attribute.Integer;
+    product: Attribute.Relation<
+      'api::variant.variant',
+      'oneToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::variant.variant',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::variant.variant',
       'oneToOne',
       'admin::user'
     > &
@@ -975,6 +1042,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::favorite-item.favorite-item': ApiFavoriteItemFavoriteItem;
       'api::product.product': ApiProductProduct;
+      'api::variant.variant': ApiVariantVariant;
     }
   }
 }

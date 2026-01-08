@@ -43,9 +43,9 @@
     "origin": {
       "type": "enumeration",
       "enum": [
-        "Mendoza",
-        "San Luis",
-        "San Juan"
+        "Argentina",
+        "Brasil",
+        "Francia"
       ]
     },
     "tipoProducto": {
@@ -89,6 +89,17 @@
         "PROTENAT",
         "M&D"
       ]
+    },
+    "stock": {
+      "type": "integer",
+      "default": 0,
+      "required": true,
+      "min": 0
+    },
+    "variants": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::variant.variant"
     }
   }
 }
