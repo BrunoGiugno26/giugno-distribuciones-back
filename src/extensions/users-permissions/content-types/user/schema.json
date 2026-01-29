@@ -67,6 +67,10 @@
     },
     "clerkId": {
       "type": "string"
+    },
+    "hasOnboarded": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

@@ -34,6 +34,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
             role: defaultRole.id,
             provider: "local",
             confirmed: true,
+            hasOnboarded: false,
           }
         })
 
@@ -53,6 +54,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           username: user.username,
           email: user.email,
           clerkId: user.clerkId,
+          hasOnboarded: user.hasOnboarded,
         },
       };
     } catch (error) {

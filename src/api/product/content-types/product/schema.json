@@ -76,11 +76,6 @@
         "Para Cabellos Dañados"
       ]
     },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
-    },
     "marca": {
       "type": "enumeration",
       "enum": [
@@ -100,6 +95,29 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::variant.variant"
+    },
+    "audience": {
+      "type": "enumeration",
+      "enum": [
+        "particulares ",
+        "peluquerias",
+        "perfumerias"
+      ],
+      "required": false
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
+    },
+    "tipo_productos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tipo-producto.tipo-producto"
+    },
+    "esReventa": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

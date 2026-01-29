@@ -719,6 +719,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.role'
     >;
     clerkId: Attribute.String;
+    hasOnboarded: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -935,11 +936,6 @@ export interface ApiProductProduct extends Schema.CollectionType {
         'Para Cabellos Da\u00F1ados'
       ]
     >;
-    category: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'api::category.category'
-    >;
     marca: Attribute.Enumeration<['HAN', 'THERAPHY', 'PROTENAT', 'M&D']>;
     stock: Attribute.Integer &
       Attribute.Required &
@@ -955,6 +951,20 @@ export interface ApiProductProduct extends Schema.CollectionType {
       'oneToMany',
       'api::variant.variant'
     >;
+    audience: Attribute.Enumeration<
+      ['particulares ', 'peluquerias', 'perfumerias']
+    >;
+    category: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::category.category'
+    >;
+    tipo_productos: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::tipo-producto.tipo-producto'
+    >;
+    esReventa: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -966,6 +976,48 @@ export interface ApiProductProduct extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTipoProductoTipoProducto extends Schema.CollectionType {
+  collectionName: 'tipo_productos';
+  info: {
+    singularName: 'tipo-producto';
+    pluralName: 'tipo-productos';
+    displayName: 'TipoProducto';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::tipo-producto.tipo-producto', 'nombre'>;
+    categories: Attribute.Relation<
+      'api::tipo-producto.tipo-producto',
+      'oneToMany',
+      'api::category.category'
+    >;
+    products: Attribute.Relation<
+      'api::tipo-producto.tipo-producto',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tipo-producto.tipo-producto',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tipo-producto.tipo-producto',
       'oneToOne',
       'admin::user'
     > &
@@ -1042,6 +1094,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::favorite-item.favorite-item': ApiFavoriteItemFavoriteItem;
       'api::product.product': ApiProductProduct;
+      'api::tipo-producto.tipo-producto': ApiTipoProductoTipoProducto;
       'api::variant.variant': ApiVariantVariant;
     }
   }
