@@ -118,6 +118,10 @@
     "esReventa": {
       "type": "boolean",
       "default": false
+    },
+    "esProfesional": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
