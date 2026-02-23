@@ -966,6 +966,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     >;
     esReventa: Attribute.Boolean & Attribute.DefaultTo<false>;
     esProfesional: Attribute.Boolean & Attribute.DefaultTo<false>;
+    esAccesoriosPro: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

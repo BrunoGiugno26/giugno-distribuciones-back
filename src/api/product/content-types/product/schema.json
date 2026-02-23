@@ -122,6 +122,10 @@
     "esProfesional": {
       "type": "boolean",
       "default": false
+    },
+    "esAccesoriosPro": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
